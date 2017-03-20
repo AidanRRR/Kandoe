@@ -1,0 +1,123 @@
+<!--
+  Generated template for the Kandoe page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>kandoe</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="presentLanguagePopover($event)" style="background: none; padding-right: 10px">
+        <p style="font-size: 20px; color: white;" >{{ 'LANGUAGE' | translate }}</p>
+      </button>
+      <button ion-button icon-only (click)="presentAccountPopover($event)" style="background: none; padding-right: 10px">
+        <ion-icon name="person" style="color: white; font-size: 30px"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <ion-segment [(ngModel)]="segment">
+    <ion-segment-button value="game">
+      {{ 'GAMEBOARD' | translate}}
+    </ion-segment-button>
+    <ion-segment-button value="chat">
+      Chat
+    </ion-segment-button>
+  </ion-segment>
+</ion-header>
+
+
+<ion-content padding>
+  <div [ngSwitch]="segment">
+    <div *ngSwitchCase="'game'">
+      <div *ngIf="connectError != null">
+        <ion-badge color="red">{{connectError}}</ion-badge>
+      </div>
+
+      <div *ngIf="connectError == null && !connected">
+        <i class="fa fa-spinner fa-spin fa-4x fa-fw"></i>
+        <p>
+          Verbinding maken met sessie...
+        </p>
+      </div>
+
+      <div *ngIf="connected && phase == 0" class="row">
+        <p>De sessie is nog niet begonnen.</p>
+      </div>
+
+      <div *ngIf="connected && picking && phase == 1">
+        <ion-item *ngFor="let card of cardPool ; let i = index">
+          <ion-grid>
+            <ion-row>
+              <ion-col width-80>
+                <ion-row class="inner-item">
+                  <ion-thumbnail item-left>
+                    <img src="{{card.imageUrl}}">
+                  </ion-thumbnail>
+                  <div style="padding-top: 15%">
+                    <h2>{{card.text}}</h2>
+                  </div>
+                </ion-row>
+              </ion-col>
+              <ion-col width-20 class="up">
+                <button *ngIf="!card.selected" ion-button icon-only (click)="onCardSelectionClick(card)">
+                  <ion-icon name="add"></ion-icon>
+                </button>
+                <button *ngIf="card.selected" style="background-color:red;" ion-button icon-only (click)="onCardSelectionClick(card)">
+                  <ion-icon name="remove"></ion-icon>
+                </button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+        <button (click)="confirmSelection()" ion-button block>Bevestigen</button>
+      </div>
+
+      <ion-list *ngIf="connected && phase == 1 && !picking">
+        <ion-item *ngFor="let card of cards | orderBy : ['-level']; let i = index">
+          <ion-grid>
+            <ion-row>
+              <ion-col width-80>
+                <ion-row class="inner-item">
+                  <ion-thumbnail item-left>
+                    <img src="{{card.card.imageUrl}}">
+                  </ion-thumbnail>
+                  <div style="padding-top: 15%">
+                    <h4>Positie: {{card.level}}</h4> <!-- Details zou modal moeten openen met details -->
+                  </div>
+                </ion-row>
+              </ion-col>
+              <ion-col width-20 class="up">
+                <button ion-button icon-only (click)="onCardClick(card.card.cardId)">
+                  <ion-icon name="arrow-up"></ion-icon>
+                </button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+      </ion-list>
+    </div>
+
+    <div *ngSwitchCase="'chat'">
+      <div class="chat-message">
+        <div *ngFor="let msg of chatLog" >
+          <!--<div [ngClass]="messageStyle">-->
+            <div [ngClass]="{'personalMessage': messageStyle=='personalMessage', 'otherMessage': messageStyle=='otherMessage' }" >
+            <span class="chat-message-user">{{msg.user}}:</span>
+            <span class="chat-message-text">{{msg.message}}</span>
+          </div>
+        </div>
+      </div>
+
+      <ion-item class="input-item3">
+        <ion-input type="text" placeholder="{{ 'SENDCHAT' | translate }}" [(ngModel)]="newMessage"></ion-input>
+      </ion-item>
+      <button  class="input-item4" ion-button block (click)="onChatMessageSend(newMessage);">{{ 'SEND' | translate }}</button>
+
+
+    </div>
+  </div>
+
+
+</ion-content>

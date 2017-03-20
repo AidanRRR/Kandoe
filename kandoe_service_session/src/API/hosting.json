@@ -1,0 +1,5 @@
+﻿{
+  "server.urls": "http://localhost:5050"
+  // hosting config
+  // for development launch settings go to properties -> launchSettings.json
+}

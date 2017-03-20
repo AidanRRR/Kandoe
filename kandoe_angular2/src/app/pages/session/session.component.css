@@ -1,0 +1,50 @@
+#outercontainer {
+}
+
+#timer {
+  text-align: center;
+}
+
+@media only screen and (min-width: 1200px) {
+  #board {
+    height: 700px;
+  }
+
+  #chat {
+    height: 700px;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  #board {
+    height: 500px;
+  }
+
+  #chat {
+    height: 250px;
+  }
+}
+
+#row-loading {
+  padding-top: 100px;
+}
+
+#row-loading > .fa-spinner {
+  color: black;
+}
+
+#row-loading > p {
+  text-align: center;
+  font-size: 20px;
+  margin-top: 16px;
+}
+
+/* */
+#row-error {
+  margin-top: 30px;
+  text-align: center;
+}
+
+#row-error > i {
+  color: #aa0000;
+}

@@ -1,0 +1,11 @@
+<div class="row">
+  <kandoe-card *ngFor="let card of cards"
+               [card]="card"
+               commentable="true"
+               editable="false"
+               (cardClick)="onCardClick($event)">
+  </kandoe-card>
+</div>
+<div class="row">
+  <button (click)="confirmSelection()" class="btn btn-lg btn-info">{{ 'CONFIRM' | translate }}</button>
+</div>

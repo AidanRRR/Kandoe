@@ -1,0 +1,35 @@
+{
+	"port": 5010,
+	"services": [
+		{
+			"name": "user-service",
+			"match": "/api/users/*",
+			"url": "http://userservice:5030"
+		},
+		{
+			"name": "auth-service",
+			"match": "/api/auth/*",
+			"url": "http://authservice:5020"
+		},
+		{
+			"name": "card-service",
+			"match": "/api/card/*",
+			"url": "http://cardservice:5040"
+		},
+		{
+			"name": "card-service",
+			"match": "/api/theme/*",
+			"url": "http://cardservice:5040"
+		},
+		{
+			"name": "session-service",
+			"match": "/api/session/*",
+			"url": "http://sessionservice:5050"
+		},
+		{
+			"name": "image-service",
+			"match": "/api/session/*",
+			"url": "http://imageservice:5060"
+		}
+	]
+}

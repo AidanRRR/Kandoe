@@ -1,0 +1,29 @@
+﻿{
+  "version": "1.0.0-*",
+  "testRunner": "xunit",
+  "dependencies": {
+    "API": "1.0.0-*",
+    "AutoMapper": "5.2.0",
+    "BL": "1.0.0-*",
+    "DAL": "1.0.0-*",
+    "dotnet-test-xunit": "2.2.0-preview2-build1029",
+    "FluentAssertions": "4.19.0",
+    "Microsoft.AspNetCore.SignalR.Server": "0.2.0-*",
+    "Microsoft.AspNetCore.StaticFiles": "1.0.0",
+    "Microsoft.AspNetCore.WebSockets": "0.2.0-*",
+    "Models": "1.0.0-*",
+    "NSubstitute": "2.0.1-rc",
+    "xunit": "2.2.0-beta2-build3300",
+    "Microsoft.DotNet.InternalAbstractions": "1.0.0"
+  },
+  "frameworks": {
+    "netcoreapp1.6": {
+      "dependencies": {
+        "Microsoft.NETCore.App": {
+          "type": "platform",
+          "version": "1.1.0"
+        }
+      }
+    }
+  }
+}

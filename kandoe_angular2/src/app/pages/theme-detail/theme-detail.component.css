@@ -1,0 +1,21 @@
+.page-header-btn {
+  float: right;
+  margin-left: 1%;
+}
+
+.btn-remove {
+}
+
+.tab-pane {
+  margin-top: 20px;
+}
+
+.pull-right {
+  margin-bottom: 20px;
+}
+
+.rowPadding{
+  padding-left: 2%;
+  padding-right: 2%;
+}
+

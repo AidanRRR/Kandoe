@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-md-6 col-md-offset-3">
+      <div class="logo">
+        <img class="logoimg" src="../../assets/images/logo.png"/>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4">
+      <div class="login-panel panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">{{ 'CREATE NEW ACCOUNT' | translate }}<button (click)="changeLanguage()" class="btn btn-default btn-lang" type="button">
+            {{ 'OTHER LANGUAGE' | translate }}
+          </button></h3>
+        </div>
+        <div class="panel-body">
+          <form name="form" id="registerForm" (ngSubmit)="f.form.valid && register()" #f="ngForm" novalidate>
+            <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+              <label for="username">{{ 'USERNAME' | translate }}</label>
+              <input type="text" class="form-control" id="username" name="username" [(ngModel)]="model.username"
+                     #username="ngModel" required/>
+              <div *ngIf="f.submitted && !username.valid" class="help-block">{{ 'USERNAME' | translate }}{{ 'REQUIRED' | translate }}</div>
+            </div>
+            <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+              <label for="password">{{ 'PASSWORD' | translate }}</label>
+              <input type="password" class="form-control" id="password" name="password" [(ngModel)]="model.password"
+                     #password="ngModel" required/>
+              <div *ngIf="f.submitted && !password.valid" class="help-block">{{ 'PASSWORD' | translate }}{{ 'REQUIRED' | translate }}</div>
+            </div>
+            <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !email.valid }">
+              <label for="email">{{ 'EMAIL' | translate }}</label>
+              <input type="email" class="form-control" id="email" name="email" [(ngModel)]="model.email"
+                     #email="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required/>
+              <div *ngIf="f.submitted && !email.valid" class="help-block">{{ 'EMAIL' | translate }}{{ 'REQUIRED' | translate }}</div>
+            </div>
+            <div class="form-group">
+              <button class="btn btn-primary" id="registerBtn">{{ 'REGISTER' | translate }}</button>
+              <a [routerLink]="['/login']" class="btn btn-link" id="cancelBtn">{{ 'CANCEL' | translate }}</a>
+            </div>
+            <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,59 @@
+<header></header>
+<div id="page-wrapper">
+  <div id="outercontainer" class="container-fluid">
+    <div id="row-loading" *ngIf="error == null && replay == null" class="row">
+      <i class="fa fa-spinner fa-spin fa-4x fa-fw"></i>
+      <p>
+        Sessie data wordt geladen...
+      </p>
+    </div>
+
+    <div id="row-error" *ngIf="error != null" class="row">
+      <i class="fa fa-exclamation-triangle fa-4x"></i>
+      <p>
+        {{error}}
+      </p>
+    </div>
+
+
+    <div id="row-replay-viewer" *ngIf="error == null && replay != null" class="row">
+      <div id="board" class="col-lg-9 col-md-12">
+        <kandoe-board [(cards)]="cards" [circleType]="circleType">
+        </kandoe-board>
+      </div>
+      <div id="chat" class="col-lg-3 col-md-12">
+        <chat [(messages)]="chatLog">
+        </chat>
+      </div>
+
+      <div id="snapshot-browser" class="col-lg-9 col-md-12">
+        <p>
+          <i (click)="onPrevClick()" class="fa fa-caret-left" aria-hidden="true"></i>
+          <span>{{position}} / {{total}}</span>
+          <i (click)="onNextClick()" class="fa fa-caret-right" aria-hidden="true"></i>
+        </p>
+      </div>
+    </div>
+    <!--
+
+    <div *ngIf="connected && phase == 1 && !picking" class="row">
+     <div id="timer" class="col-lg-9">
+        <div *ngIf="currentPlayer != null">
+          {{currentPlayer}}  -
+          <i class="fa fa-clock-o" aria-hidden="true"></i> {{timeLeft | timespan}}
+        </div>
+      </div>
+
+      <div id="manager-buttons" class="col-lg-9">
+        <button (click)="onSnapshotClick()">Snapshot</button>
+        <button (click)="onSessionEndClick()">Beeindig Sessie</button>
+      </div>
+    </div>
+
+    <div *ngIf="connected && phase == 2" class="row">
+      afgelopen
+    </div>
+    -->
+
+  </div>
+</div>

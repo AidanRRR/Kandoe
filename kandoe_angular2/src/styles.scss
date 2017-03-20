@@ -1,0 +1,109 @@
+/* You can add global styles to this file, and also import other style files */
+
+
+$green:#3cb878;
+$yellow:#fcb03b;
+$red:#f15b26;
+$blue:#566FC9;
+$pink:#ea65a2;
+$black:#2f2c2c;
+$grey:#2f2c2c;
+$white:#fff;
+$light_grey:#eee;
+$font_main: 'Varela Round', sans-serif;
+$font_head: 'Montserrat', sans-serif;
+
+#page-wrapper {
+	background-image: url("assets/images/crossword.png");
+    background-repeat: repeat-y repeat-x;
+}
+
+body {
+	color: $grey;
+	font-family:$font_main;
+	font-size: 14px;
+	font-style: normal;
+	line-height:1.5;
+	background:$light_grey;
+	overflow-x:hidden;
+}
+
+a:hover,a:active {
+    outline: 0;
+}
+
+button:focus{
+	border:none;
+	outline:0;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+   text-decoration: none;
+   color:$black;
+}
+
+a:hover {
+    text-decoration: none;
+	 color:$black;
+}
+
+a:focus {
+ 	text-decoration: none;
+    outline: none;
+	 color:$black;
+}
+
+
+h1,h2,h3,h4,h5,h6 {
+	font-family:$font_head;
+	color:$black;
+}
+
+h1{
+	font-size:48px;
+	line-height:60px;
+}
+
+h2{
+	font-size: 36px;
+    line-height: 44px;
+}
+
+h3 {
+	font-size:30px;
+}
+
+h4{
+	font-size:24px;
+	line-height:30px;
+	text-transform:capitalize;
+}
+
+h5{
+	font-size:18px;
+	line-height:26px;
+	text-transform:capitalize;
+}
+
+h6{
+	font-size:13px;
+	line-height:20px;
+	text-transform:uppercase;
+}
+p{
+	font-size:14px;
+	line-height:25px;
+	&.lead {
+		font-size:18px;
+		line-height:29px;
+		margin-bottom:0;
+	}
+	&.text-muted {
+		font-size: 14px;
+	}
+}
+

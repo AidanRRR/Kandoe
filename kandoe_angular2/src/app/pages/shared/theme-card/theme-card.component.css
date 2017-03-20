@@ -1,0 +1,6 @@
+.setHeight {
+  line-height: 1em;
+  height: 2em; /* height is 2x line-height, so two lines will display */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

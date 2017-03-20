@@ -1,0 +1,61 @@
+#row-loading {
+  text-align: center;
+  padding-top: 200px;
+}
+
+#row-error {
+  text-align: center;
+  padding-top: 200px;
+}
+
+#row-error > i {
+  color: red;
+}
+
+/* ***** */
+#snapshot-browser {
+  font-size: 35px;
+  user-select: none;
+  text-align: center;
+}
+
+#snapshot-browser > p > i {
+  padding-left: 20px;
+  padding-right: 20px;
+  color: black;
+}
+
+i {
+  color: black;
+}
+
+#snapshot-browser > p > i:hover {
+  color: red;
+  cursor: pointer;
+}
+
+#snapshot-browser > p > span {
+}
+
+/* *** */
+@media only screen and (min-width: 1200px) {
+  #board {
+    height: 700px;
+  }
+
+  #chat {
+    height: 700px;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  #board {
+    height: 500px;
+  }
+
+  #chat {
+    height: 250px;
+  }
+}
+
+

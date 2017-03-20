@@ -1,0 +1,41 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{currentTheme.name}}</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="dismiss()" style="background: none; padding-right: 15px; color: white">
+        <p>{{ 'CLOSE' | translate }}</p>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+<!--Kaart met details van thema-->
+  <ion-card>
+    <ion-card-content >
+      <h2>{{currentTheme.name}}</h2>
+      <p>{{currentTheme.description}}</p>
+      <br>
+      <p class="card-text">{{ 'TAGS' | translate }}: {{currentTheme.tags}}</p>
+      <p class="card-text">{{ 'ADMINS' | translate }}: {{currentTheme.users}}</p>
+      <p class="card-text">{{ 'LAST UPDATED' | translate }}: {{currentTheme.updatedOn | amTimeAgo}}</p>
+      <p class="card-text">{{ 'CREATED ON' | translate }}: {{currentTheme.createdOn | amDateFormat:'LL'}}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <!--Lijst met alle kaarten-->
+  <ion-list class="cardslist">
+    <h4>{{ 'CARDS FROM THEME' | translate }}</h4>
+    <ion-item *ngFor="let c of cards">
+      <ion-thumbnail item-left>
+        <img [src]="c.imageUrl"/>
+      </ion-thumbnail>
+      <p>{{c.text}}</p>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

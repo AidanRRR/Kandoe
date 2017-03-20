@@ -1,0 +1,94 @@
+<div id="wrapper">
+
+  <push-notification #myNotification
+                     [title]="notification.title"
+                     [body]="notification.body"
+                     [icon]="notification.icon"
+  >
+  </push-notification>
+  <!-- Navigation -->
+  <nav class="navbar navbar-inverse navbar-static-top" role="navigation" style="margin-bottom: 0">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><img src="../../assets/images/logo.png" id="kandoeLogo" height="40"/></a>
+    </div>
+    <!-- /.navbar-header -->
+
+    <ul class="nav navbar-top-links navbar-right">
+      <!-- /.dropdown-language -->
+      <li class="dropdown" *ngIf="loggedIn">
+        <a class="dropdown-toggle" id="toggle2" data-toggle="dropdown" href="#">
+          {{ 'LANGUAGE' | translate }} <i class="fa fa-caret-down"></i>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-language">
+          <li (click)="changeLanguage('nl')"><a href="/">NL</a>
+          </li>
+          <li class="divider"></li>
+          <li (click)="changeLanguage('en')"><a href="/">EN</a>
+          </li>
+        </ul>
+        <!-- /.dropdown-language -->
+      </li>
+
+      <li *ngIf="!loggedIn"><a routerLink="/login" routerLinkActive="active" class="whiteText"><i class="fa fa-sign-in fa-fw"></i> {{ 'LOGIN' | translate }}</a>
+      <!-- /.dropdown-user -->
+      <li class="dropdown" *ngIf="loggedIn">
+        <a class="dropdown-toggle" id="toggle" data-toggle="dropdown" href="#">
+          <i class="fa fa-user fa-fw"></i> {{username}} <i class="fa fa-caret-down"></i>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a routerLink="/profile" routerLinkActive="active"><i class="fa fa-user fa-fw"></i> {{ 'MY ACCOUNT' | translate }}</a>
+          </li>
+          <li class="divider"></li>
+          <li (click)="logout()"><a href="/"><i class="fa fa-sign-out fa-fw"></i> {{ 'LOGOUT' | translate }}</a>
+          </li>
+        </ul>
+        <!-- /.dropdown-user -->
+      </li>
+      <!-- /.dropdown -->
+    </ul>
+
+    <div class="navbar-default sidebar" role="navigation">
+      <div class="sidebar-nav navbar-collapse">
+        <ul class="nav" id="side-menu">
+          <li class="sidebar-search">
+            <div class="input-group custom-search-form">
+              <input type="search" class="form-control" [(ngModel)]="search" id="search" name="search"
+                     placeholder="Zoek naar thema's">
+              <span class="input-group-btn">
+                                    <button (click)="onSearchClick()" class="btn btn-default" id="searchButton" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+              </span>
+            </div>
+            <!-- /input-group -->
+          </li>
+          <li *ngIf="loggedIn">
+            <a routerLink="/sessions" routerLinkActive="active"><i class="fa fa-dashboard fa-fw sidebar-icon"></i>{{ 'MY SESSIONS' | translate }}</a>
+          </li>
+          <li *ngIf="loggedIn">
+            <a routerLink="/themes" routerLinkActive="active"><i class="fa fa-calendar-o fa-fw sidebar-icon"></i>{{ 'MY THEMES' | translate }}</a>
+          </li>
+          <li *ngIf="loggedIn">
+            <a routerLink="/invites" routerLinkActive="active"><i class="fa fa-envelope fa-fw sidebar-icon"></i>{{ 'INVITES' | translate }}</a>
+          </li>
+          <li>
+            <a routerLink="/about" routerLinkActive="active"><i class="fa fa-info-circle fa-fw sidebar-icon"></i>{{ 'ABOUT KANDOE' | translate }}</a>
+          </li>
+        </ul>
+      </div>
+      <!-- /.sidebar-collapse -->
+    </div>
+    <!-- /.navbar-static-side -->
+  </nav>
+  <!-- /#page-wrapper -->
+
+</div>
+
+
+

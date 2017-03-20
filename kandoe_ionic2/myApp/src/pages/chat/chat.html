@@ -1,0 +1,31 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Chat</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="presentLanguagePopover($event)" style="background: none; padding-right: 10px">
+        <p style="font-size: 20px; color: white;" >{{ 'LANGUAGE' | translate }}</p>
+      </button>
+      <button ion-button icon-only (click)="presentAccountPopover($event)" style="background: none; padding-right: 10px">
+        <ion-icon name="person" style="color: white; font-size: 30px"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content id="chat" class="chat">
+  <div *ngFor="let msg of messages"
+    class="chat-message">
+      <span class="chat-message-user">{{msg.user}}</span>
+      <span class="chat-message-text">{{msg.message}}</span>
+  </div>
+  <div class="msg">
+    <input [(ngModel)]="inputBuffer" (keyup)="onKeyUp($event)" maxlength="150" class="form-control input-sm" placeholder="Stuur een chat bericht...">
+    <!--<input type="text" placeholder="Message ..." [(ngModel)]="msg" (keydown.enter)="sendMessage()">
+    <button ion-button round (click)="sendMessage()"[disabled]="msg === ''">
+      Send
+    </button>-->
+  </div>
+</ion-content>
+

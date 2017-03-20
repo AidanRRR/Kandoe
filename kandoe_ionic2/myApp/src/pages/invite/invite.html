@@ -1,0 +1,62 @@
+<!--
+  Generated template for the Invite page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{ 'INVITE' | translate }}</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="presentLanguagePopover($event)" style="background: none; padding-right: 10px">
+        <p style="font-size: 20px; color: white;" >{{ 'LANGUAGE' | translate }}</p>
+      </button>
+      <button ion-button icon-only (click)="presentAccountPopover($event)" style="background: none; padding-right: 10px">
+        <ion-icon name="person" style="color: white; font-size: 30px"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-card *ngIf="isEmpty">
+    <ion-card-header>
+      Geen uitnodigingen
+    </ion-card-header>
+
+  </ion-card>
+
+
+  <ion-card *ngFor="let ssn of invitedSessions">
+    <ion-card-header>
+      {{ssn.name}}
+    </ion-card-header>
+    <ion-card-content>
+      <button ion-button icon-only (click)="acceptInvite(ssn.sessionId)" style="padding-right: 10px; padding-left: 10px;">
+        <p style=" color:white">Accepteer</p>
+      </button>
+      <button ion-button icon-only (click)="addInviteToCalender(ssn)" style="padding-right: 10px;padding-left: 10px;">
+        <p style=" color:white">Voeg toe aan calender</p>
+      </button>
+    </ion-card-content>
+  </ion-card>
+
+  <!--<ion-grid>-->
+    <!--<ion-row>-->
+      <!--<ion-col col-10>-->
+      <!--</ion-col>-->
+      <!--<ion-col col-2>-->
+        <!--<button ion-button icon-only>-->
+          <!--<ion-icon (click)="addInviteToCalender()" md="md-calendar"></ion-icon>-->
+        <!--</button>-->
+      <!--</ion-col>-->
+    <!--</ion-row>-->
+  <!--</ion-grid>-->
+
+</ion-content>

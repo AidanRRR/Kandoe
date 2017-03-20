@@ -1,0 +1,37 @@
+<svg id="board" viewBox="0 0 500 500" (mousemove)="mouseMove($event)" xmlns:svg="http://www.w3.org/2000/svg">
+  <svg:circle
+    *ngFor="let r of circleRadius"
+    cx="50%"
+    cy="50%"
+    [attr.r]="r"
+    fill="none"
+    [attr.stroke-width]="circleWidth"
+    [attr.stroke]="circleType == 0 ? chanceColor : problemColor">
+  </svg:circle>
+
+  <defs>
+    <pattern *ngFor="let c of cards"
+             id="image-{{c.card.cardId}}"
+             height="110%" width="110%"
+             patternContentUnits="objectBoundingBox">
+      <image [attr.href]="c.card.imageUrl"
+             preserveAspectRatio="none"
+             width="1" height="1"/>
+    </pattern>
+  </defs>
+
+  <svg:circle
+    *ngFor="let c of cards"
+    (mouseenter)="mouseEnter(c)"
+    (mouseleave)="mouseLeave(c)"
+    (mousedown)="mouseDown(c)"
+    (mouseup)="mouseUp(c)"
+    [attr.cx]="cardX(c)"
+    [attr.cy]="cardY(c)"
+    [attr.r]="cardRadius(c)"
+    attr.fill="url(#image-{{c.card.cardId}})"
+    stroke-width="2"
+    [attr.stroke]="c.color">
+    <title>{{c.text || '???'}}</title>
+  </svg:circle>
+</svg>

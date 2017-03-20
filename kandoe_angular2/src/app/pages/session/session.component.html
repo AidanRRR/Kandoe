@@ -1,0 +1,65 @@
+<header></header>
+<div id="page-wrapper">
+  <div id="outercontainer" class="container-fluid">
+
+    <div id="row-error" *ngIf="connectError != null" class="row">
+      <i class="fa fa-exclamation-triangle fa-4x"></i>
+      <p>
+        {{connectError}}
+      </p>
+    </div>
+
+    <div id="row-loading" *ngIf="connectError == null && !connected" class="row">
+      <i class="fa fa-spinner fa-spin fa-4x fa-fw"></i>
+      <p>
+        {{ 'CONNECTING TO SESSION' | translate }}...
+      </p>
+    </div>
+
+    <!-- Gepland -->
+    <div *ngIf="connected && phase == 0" class="row">
+      De sessie is nog niet begonnen.
+    </div>
+
+    <!-- Kaarten kiezen -->
+    <div *ngIf="connected && picking && phase == 1" class="row">
+      <card-picker [cards]="cardPool"
+                   [minPicks]="minPicks"
+                   [maxPicks]="maxPicks"
+                   (selectionConfirmed)="onCardPickSelectionConfirmed($event)">
+      </card-picker>
+    </div>
+
+    <!-- Spelen -->
+    <div *ngIf="connected && phase == 1 && !picking" class="row">
+      <div id="board" class="col-lg-9 col-md-12">
+        <kandoe-board [(cards)]="cards"
+                      [circleType]="circleType"
+                      (onCardClicked)="onCardClick($event)">
+        </kandoe-board>
+      </div>
+      <div id="chat" class="col-lg-3 col-md-12">
+        <chat (onMessageSend)="onChatMessageSend($event)"
+              [(messages)]="chatLog">
+        </chat>
+      </div>
+      <div id="timer" class="col-lg-9">
+        <div *ngIf="currentPlayer != null">
+          {{currentPlayer}} -
+          <i class="fa fa-clock-o" aria-hidden="true"></i> {{timeLeft | timespan}}
+        </div>
+      </div>
+
+      <div id="manager-buttons" class="col-lg-9">
+        <button (click)="onSnapshotClick()">{{ 'SNAPSHOT' | translate }}</button>
+        <button (click)="onSessionEndClick()">{{ 'END SESSION' | translate }}</button>
+      </div>
+    </div>
+
+    <!-- Afgelopen -->
+    <div *ngIf="connected && phase == 2" class="row">
+      {{ 'SESSION ENDED' | translate }}
+    </div>
+
+  </div>
+</div>

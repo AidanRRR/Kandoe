@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{ 'THEMES' | translate }}</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="presentModal()" style="background: none; padding-right: 15px">
+        <ion-icon name="add" style="color: white; font-size: 30px"></ion-icon>
+      </button>
+      <button ion-button icon-only (click)="presentLanguagePopover($event)" style="background: none; padding-right: 10px">
+        <p style="font-size: 20px; color: white;" >{{ 'LANGUAGE' | translate }}</p>
+      </button>
+      <button ion-button icon-only (click)="presentAccountPopover($event)" style="background: none; padding-right: 10px">
+        <ion-icon name="person" style="color: white; font-size: 30px"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding >
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-searchbar end (ionInput)="getThemes($event)" ></ion-searchbar>
+
+  <ion-item>
+    <ion-label>{{ 'MY THEMES' | translate }}</ion-label>
+  </ion-item>
+
+  <ion-card *ngFor="let t of filterMyThemes" >
+    <ion-grid>
+        <ion-row>
+          <ion-col class="myThemesContent" (click)="presentDetailsModal(t.themeId)">
+            <ion-card-content >
+              <h2>{{t.name}}</h2>
+              <p>{{t.description}}</p>
+              <p class="card-text">{{ 'TAGS' | translate }}: {{t.tags}}</p>
+              <p class="card-text">{{ 'ADMINS' | translate }}: {{t.users}}</p>
+              <p class="card-text">{{ 'LAST UPDATED' | translate }}: {{t.updatedOn | amTimeAgo}}</p>
+              <p class="card-text">{{ 'CREATED ON' | translate }}: {{t.createdOn | amDateFormat:'LL'}}</p>
+            </ion-card-content>
+          </ion-col>
+          <ion-col class="myThemesButtons">
+            <button ion-button icon-right clear (click)="deleteTheme(t.themeId)">
+              <ion-icon name="trash"></ion-icon>
+            </button>
+            <button ion-button icon-right clear (click)="presenEditThemeModal(t.themeId)">
+              <ion-icon name="hammer"></ion-icon>
+            </button>
+          </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+
+  <ion-item>
+    <ion-label>{{ 'PUBLIC THEMES' | translate }}</ion-label>
+  </ion-item>
+
+  <ion-card *ngFor="let t of filterPublicThemes" (click)="presentDetailsModal(t.themeId)" >
+    <ion-card-content >
+      <h2>{{t.name}}</h2>
+      <p>{{t.description}}</p>
+      <br>
+      <p class="card-text">{{ 'TAGS' | translate }}: {{t.tags}}</p>
+      <p class="card-text">{{ 'ADMINS' | translate }}: {{t.users}}</p>
+      <p class="card-text">{{ 'LAST UPDATED' | translate }}: {{t.updatedOn | amTimeAgo}}</p>
+      <p class="card-text">{{ 'CREATED ON' | translate }}: {{t.createdOn | amDateFormat:'LL'}}</p>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

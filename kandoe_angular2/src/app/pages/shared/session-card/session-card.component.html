@@ -1,0 +1,13 @@
+<div class="col-xs-18 col-sm-6 col-md-3">
+  <div class="thumbnail">
+    <div class="caption">
+      <h4 class="setHeight">{{session.name}}</h4>
+      <p class="setHeight">Type: {{session.circleType == 0 ? 'kans': 'probleem'}}</p>
+      <p class="setHeight">Start: {{session.scheduledStartTime == null ? 'Manueel': session.scheduledStartTime | date:'medium'}}</p>
+      <p>{{session.createdOn | date}}</p>
+      <a (click)="onEditClick(session.sessionId)" class="btn btn-info btn-xs" role="button">Details</a>
+      <a *ngIf="session.phase == 1 && loggedIn" (click)="onPlay()" class="btn btn-success btn-xs" role="button">Speel</a>
+      <a *ngIf="session.phase == 2" (click)="onReplay()" class="btn btn-success btn-xs" role="button">Replay</a>
+    </div>
+  </div>
+</div>

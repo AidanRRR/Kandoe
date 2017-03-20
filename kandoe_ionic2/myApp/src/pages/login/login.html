@@ -1,0 +1,39 @@
+
+<ion-content class="login" padding>
+  <ion-grid>
+    <ion-row>
+      <button ion-button class="language-button" (click)="changeLanguage();">{{ 'OTHER LANGUAGE' | translate }}</button>
+
+    </ion-row>
+  </ion-grid>
+  <ion-list inset>
+    <img class="logo" src="assets/img/kandoe_white.png"/>
+    <ion-item class="input-item1">
+      <ion-label class="input-label" stacked>{{ 'USERNAME' | translate }}</ion-label>
+      <ion-input type="text"  [(ngModel)]="model.userName"></ion-input>
+    </ion-item>
+
+    <ion-item class="input-item1" style="padding-bottom: 15px">
+      <ion-label class="input-label" stacked>{{ 'PASSWORD' | translate }}</ion-label>
+      <ion-input type="password"  [(ngModel)]="model.password"></ion-input>
+    </ion-item>
+
+    <button class="login-button" ion-button block (click)="doLogin();">{{ 'LOGIN' | translate }}</button>
+    <button class="login-button" ion-button block (click)="goToRegisterPage();">{{ 'REGISTER' | translate }}</button>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col width-50>
+          <button class="socialbutton googlebutton" ion-button icon-only>
+            <ion-icon name="logo-googleplus"></ion-icon>
+          </button>
+          </ion-col>
+        <ion-col width-50>
+          <button class="socialbutton facebookbutton" ion-button icon-only>
+            <ion-icon name="logo-facebook"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-list>
+</ion-content>

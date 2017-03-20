@@ -1,0 +1,18 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <i class="fa fa-comments" aria-hidden="true"></i>
+    Chat
+  </div>
+  <div #chatBody class="panel-body">
+    <div
+      *ngFor="let msg of messages"
+      class="chat-message">
+      <span class="chat-message-user">{{msg.user}}</span>
+      <span class="chat-message-text">{{msg.message}}</span>
+    </div>
+  </div>
+  <div class="panel-footer">
+    <input [(ngModel)]="inputBuffer" (keyup)="onKeyUp($event)" maxlength="150" class="form-control input-sm"
+           placeholder="Stuur een chat bericht...">
+  </div>
+</div>

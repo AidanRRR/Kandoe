@@ -1,0 +1,4 @@
+input[type=checkbox] {
+  transform: scale(1.5);
+  margin-left: 5px;
+}

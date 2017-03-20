@@ -1,0 +1,35 @@
+.container {
+  min-height: 100%;
+  width: 100%;
+  background-color: #50aee2;
+}
+
+.btn-primary {
+  background-color: #50aee2;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #417ea8;
+}
+
+.logoimg {
+  margin-top: 100px;
+  width: 100%;
+}
+
+.login-panel {
+  margin-top: 100px;
+}
+
+.panel-heading{
+  height: 50px;
+}
+
+.btn-lang{
+  float: right;
+}
+
+.panel-title{
+  font-size: 20px;
+}

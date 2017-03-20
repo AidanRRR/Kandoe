@@ -1,0 +1,97 @@
+<header></header>
+<div id="page-wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class="page-header">{{currentSession.name}}
+          <button type="button" *ngIf="isOrganizer" data-toggle="modal"
+                  data-target="#cloneSessionModal"
+                  class="btn btn-default btn-circle page-header-btn"><i class="fa fa-clone"></i></button>
+          <button type="button" *ngIf="(isPublic || isOrganizer) && currentSession.phase == 2" (click)="replaySession()"
+                  class="btn btn-default btn-circle page-header-btn"><i class="fa fa-repeat"></i></button>
+          <button type="button" *ngIf="isOrganizer" data-toggle="modal"
+                  data-target="#inviteUserModal"
+                  class="btn btn-default btn-circle page-header-btn"><i class="fa fa-plus"></i></button>
+          <button type="button" *ngIf="isOrganizer" (click)="startSession()"
+                  class="btn btn-default btn-circle page-header-btn"><i class="fa fa-play"></i></button>
+
+        </h1>
+      </div>
+      <!-- /.col-lg-12 -->
+      <div class="col-md-12">
+          <h4>{{ 'DESCRIPTION' | translate }}</h4>
+          <p>{{currentSession.description}}</p>
+          <br>
+          <p>{{ 'PLAYERS' | translate }}: {{currentSession.playerIds}}</p>
+          <p>{{ 'THEME' | translate }}:
+            <button (click)="navigateToTheme()" type="button" class="btn btn-link">{{themanaam}}</button>
+          </p>
+          <p>{{ 'TYPE' | translate }}: {{currentSession.circleType == 0 ? 'kans': 'probleem'}}</p>
+          <p>{{ 'STARTTIME' | translate }}: {{currentSession.scheduledStartTime == null ? 'Manueel': currentSession.scheduledStartTime | date:'medium'}}</p>
+        <hr>
+        <kandoe-card
+          *ngFor="let c of cards"
+          [card]="c">
+        </kandoe-card>
+      </div>
+    </div>
+  </div>
+  <!-- /.row -->
+</div>
+
+
+<!-- Modal -->
+<div id="inviteUserModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">{{ 'INVITE' | translate }}</h4>
+      </div>
+      <div class="modal-body">
+        <form name="form" (ngSubmit)="sendInvite()">
+          <div class="form-group">
+            <label for="inviteEmail">{{ 'EMAIL' | translate }}</label>
+            <input type="text" class="form-control" id="inviteEmail" name="inviteEmail"
+                   [(ngModel)]="inviteEmail" required/>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-primary">{{ 'INVITE' | translate }}</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Modal -->
+<div id="cloneSessionModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Kloon sessie</h4>
+      </div>
+      <div class="modal-body">
+        <form name="form" (ngSubmit)="cloneSession()">
+          <div class="form-group">
+            <label for="cloneSessionName">Naam</label>
+            <input type="text" class="form-control" id="cloneSessionName" name="cloneSessionName"
+                   [(ngModel)]="cloneSessionName" required/>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-primary">Kloon sessie</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>

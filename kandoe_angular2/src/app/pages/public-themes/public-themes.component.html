@@ -1,0 +1,16 @@
+<header></header>
+<div id="page-wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12" id="publicThemesPage">
+        <h1 class="page-header">{{ 'PUBLIC THEMES' | translate }}</h1>
+      </div>
+      <theme-card
+        *ngFor="let t of filterThemes" [theme]="t">
+      </theme-card>
+    </div>
+    <!-- /.row -->
+  </div>
+  <!-- /.container-fluid -->
+</div>
+

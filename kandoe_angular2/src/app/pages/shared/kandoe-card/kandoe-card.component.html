@@ -1,0 +1,52 @@
+<div class="col-xs-18 col-sm-6 col-md-3">
+  <div class="thumbnail kandoe-card"
+       (click)="onCardClick()"
+       [class.kandoe-card-selected]="card.selected">
+    <p class="kandoe-card-buttons">
+      <i *ngIf="editable" (click)="onEditClick($event)" class="edit-button fa fa-pencil" aria-hidden="true"></i>
+      <i *ngIf="commentable" (click)="onCommentsClick($event)" class="comments-button fa fa-comments"
+         aria-hidden="true"></i>
+    </p>
+    <div class="landscape">
+      <img [src]="card.imageUrl"/>
+    </div>
+    <div class="caption">
+      <p class="kandoe-card-text">{{card.text}}</p>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div id="reactionModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Reacties</h4>
+      </div>
+      <div class="modal-body">
+        <form name="form">
+          <div *ngFor="let r of reactions">
+          <div class="panel panel-primary">
+            <div class="panel-body">
+              <p>
+              {{r.message}}
+              </p>
+            </div>
+            <div class="panel-footer">
+              {{r.username}} - {{r.time | date:'medium'}}
+            </div>
+          </div>
+      </div>
+          <input type="text" class="form-control" id="newReaction" name="newReaction" [(ngModel)]="newReaction"/>
+          <a (click)="addReaction()" class="btn btn-info btn-xs" role="button">Voeg toe</a>
+          <div class="modal-footer">
+            <button type="button" (click)="close()" class="btn btn-default">Close</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

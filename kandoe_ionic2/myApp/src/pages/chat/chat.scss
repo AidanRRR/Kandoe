@@ -1,0 +1,71 @@
+.chat {
+  padding-bottom: 50px;
+  height: 100%;
+
+  .header {
+    display: block;
+    height: 40px;
+    width: 100%;
+    padding: 0 5px;
+    border-bottom: 1px solid #222;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #f4f4f4;
+    h2 {
+      font-size: 18px;
+      padding: 8px 0;
+      margin: 0;
+      float: left;
+      display: block;
+    }
+    button {
+      margin: 6px 0;
+      float: right;
+    }
+  }
+
+  .messages {
+    width: 100%;
+    position: absolute;
+    .message {
+      width: 70%;
+      padding: 5px 10px;
+      background: #50aee2;
+      color: #fff;
+      border-radius: 5px;
+      margin: 5px;
+      float: left;
+      .date {
+        display: block;
+        font-size: 10px;
+      }
+    }
+
+    .msg {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      padding: 0 20px;
+      width: 100%;
+      height: 45px;
+      background: #f4f4f4;
+      input {
+        display: block;
+        float: left;
+        width: 75%;
+        outline: none;
+        border-radius: 3px;
+        padding: 4px 5px;
+        margin-top: 10px;
+      }
+      button {
+        display: block;
+        float: right;
+        width: 18%;
+      }
+    }
+
+  }
+}
+

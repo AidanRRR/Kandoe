@@ -1,0 +1,4 @@
+﻿{
+  "BlobConnectionString": "DefaultEndpointsProtocol=https;AccountName=kandoeblob;AccountKey=wh1GcLth48ham33w9dAFIx27BaBnnfOCT8EbZCHg0NDDqzMW/FrhQRSLw4q16tqLrVavRv7F4JDwxe1Mgy9/wA==;",
+  "ContainerReference":  "kandoe-images" 
+}

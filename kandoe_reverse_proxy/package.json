@@ -1,0 +1,17 @@
+{
+  "name": "kandoe_gateway",
+  "version": "1.0.0",
+  "description": "Gateway voor microservices",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Team Pijl",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "cors": "^2.8.1",
+    "express": "^4.15.2",
+    "http-proxy": "^1.16.2"
+  }
+}

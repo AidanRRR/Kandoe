@@ -1,0 +1,287 @@
+<header></header>
+<div id="page-wrapper">
+  <div class="container-fluid">
+    <div class="row" *ngIf="currentTheme">
+      <div class="col-lg-12">
+        <h1 class="page-header">{{currentTheme.name}}
+          <button type="button" (click)="removeTheme()" *ngIf="isOrganizer"
+                  class="btn btn-default btn-circle page-header-btn"><i
+            class="fa fa-trash"></i></button>
+          <button type="button" *ngIf="isOrganizer" data-toggle="modal"
+                  data-target="#cloneThemeModal"
+                  class="btn btn-default btn-circle page-header-btn"><i class="fa fa-clone"></i></button>
+          <button type="button" *ngIf="isOrganizer" data-toggle="modal"
+                  data-target="#editThemeModal"
+                  class="btn btn-default btn-circle page-header-btn"><i class="fa fa-pencil"></i></button>
+        </h1>
+      </div>
+      <!-- /.col-lg-12 -->
+      <div class="col-md-12">
+        <div class="card-block px-3">
+          <h4 class="card-title">Omschrijving</h4>
+          <p class="card-text">{{currentTheme.description}}</p>
+          <br>
+          <p class="card-text">Tags: {{currentTheme.tags}}</p>
+          <p class="card-text">Beheerder(s): {{currentTheme.organizers}}</p>
+          <p class="card-text">Laatst gewijzigd: {{currentTheme.updatedOn | date:'medium'}}</p>
+          <p class="card-text">Aangemaakt op: {{currentTheme.createdOn | date:'medium'}}</p>
+        </div>
+      </div>
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#sessions" data-toggle="tab">Sessies</a>
+        </li>
+        <li><a id="nav-cards" href="#cards" data-toggle="tab">Kaarten</a>
+        </li>
+      </ul>
+
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div class="tab-pane fade in active" id="sessions">
+          <div class="row">
+            <br>
+            <div class="pull-right" *ngIf="isOrganizer">
+              <button type="button" data-toggle="modal" data-target="#addSessionModal"
+                      class="btn btn-default btn-circle btn-lg"><i class="fa fa-plus"></i></button>
+              <button type="button" class="btn btn-default btn-circle btn-lg"><i class="fa fa-trash"></i></button>
+            </div>
+          </div>
+          <session-card
+            *ngFor="let s of sessions" [session]="s">
+          </session-card>
+        </div>
+        <div class="tab-pane fade" id="cards">
+          <div class="row">
+            <br>
+            <div class="pull-right" *ngIf="isOrganizer">
+              <button id="page-header-add-btn" type="button" data-toggle="modal"
+                      data-target="#addCardModal"
+                      class="btn btn-default btn-circle btn-lg"><i class="fa fa-plus"></i></button>
+              <button id="page-header-export-btn" type="button" (click)="exportCards()"
+                      class="btn btn-default btn-circle btn-lg"><i class="fa fa-share"></i></button>
+            </div>
+          </div>
+          <kandoe-card
+            *ngFor="let c of cards"
+            (cardClick)="cardClick($event)"
+            [card]="c">
+          </kandoe-card>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /.row -->
+</div>
+
+
+<!-- Modal -->
+<div id="editThemeModal" class="modal fade" role="dialog" *ngIf="currentTheme">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Wijzig thema</h4>
+      </div>
+      <div class="modal-body">
+        <form name="form" (ngSubmit)="editTheme()">
+          <div class="form-group">
+            <label for="name">Naam</label>
+            <input type="text" class="form-control" id="name" name="name" [(ngModel)]="currentTheme.name"/>
+          </div>
+          <div class="form-group">
+            <label for="description">Omschrijving</label>
+            <textarea rows="3" class="form-control" id="description" name="description"
+                      [(ngModel)]="currentTheme.description"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="newTag">Tags</label>
+            <ul class="list-group">
+              <li *ngFor="let tag of currentTheme.tags" class="list-group-item">
+                {{ tag }}
+                <button type="button" (click)="removeTag(tag)" class="btn btn-default btn-circle btn-remove"><i
+                  class="fa fa-times"></i></button>
+              </li>
+            </ul>
+            <input type="text" class="form-control" id="newTag" name="newTag" [(ngModel)]="newTag"/>
+            <a (click)="addNewTag()" class="btn btn-info btn-xs" role="button">Voeg toe</a>
+          </div>
+          <div class="form-group">
+            <label for="newUser">Voeg beheerder(s) toe</label>
+            <ul class="list-group">
+              <li *ngFor="let user of currentTheme.organizers" class="list-group-item">
+                {{ user }}
+                <button type="button" (click)="removeUser(user)" class="btn btn-default btn-circle btn-remove"><i
+                  class="fa fa-times"></i></button>
+              </li>
+            </ul>
+            <input type="text" class="form-control" id="newUser" name="newUser" [(ngModel)]="newUser"/>
+            <a (click)="addNewUser()" class="btn btn-info btn-xs" role="button">Voeg toe</a>
+          </div>
+          <div class="form-group">
+            <label for="public">Openbaar?</label>
+            <input type="checkbox" id="public" name="public" [(ngModel)]="currentTheme.isPublic">
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-primary">Wijzig</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div id="addCardModal" class="modal fade" role="dialog" *ngIf="currentTheme">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Voeg kaart toe</h4>
+      </div>
+      <div class="modal-body">
+        <form name="form" (ngSubmit)="addCard()">
+          <div class="form-group">
+            <label for="tekst">Tekst</label>
+            <input type="text" class="form-control" id="tekst" name="tekst" [(ngModel)]="newCard.text" required/>
+          </div>
+          <div class="form-group">
+            <label for="picUrl">Afbeelding Url</label>
+            <input class="form-control" type="url" name="picUrl" id="picUrl" [(ngModel)]="newCard.imageUrl">
+          </div>
+          <div class="form-group">
+            <label for="pic">Afbeelding</label>
+            <div class="input-group">
+              <input class="form-control" type="file" id="pic" (change)="onChangeImg($event)" name="pic"
+                     accept="image/*">
+            </div>
+          </div>
+          <button class="btn btn-primary">Maak aan</button>
+        </form>
+        <hr>
+        <form name="forn" (ngSubmit)="importCards()">
+          <div class="form-group">
+            <label for="csv">Importeer CSV</label>
+            <div class="input-group">
+              <input class="form-control" type="file" id="csv" name="csv" (change)="onChange($event)" accept="csv/*">
+              <span class="input-group-btn">
+               <button class="btn btn-default">Importeer</button>
+              </span>
+            </div>
+          </div>
+        </form>
+        <br>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div id="addSessionModal" class="modal fade" role="dialog" *ngIf="currentTheme">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Voeg sessie toe</h4>
+      </div>
+      <div class="modal-body">
+        <form name="form" (ngSubmit)="addSession()">
+          <ul class="nav nav-tabs">
+            <li class="active"><a href="#sessie" data-toggle="tab">Sessie</a>
+            </li>
+            <li><a href="#addCards" data-toggle="tab">Kies kaarten</a>
+            </li>
+          </ul>
+          <div class="tab-content">
+            <div class="tab-pane fade in active" id="sessie">
+              <div class="row rowPadding">
+                <div class="form-group">
+                  <label for="sessionName">Naam</label>
+                  <input type="text" class="form-control" id="sessionName" name="sessionName" [(ngModel)]="newSession.name" required/>
+                </div>
+                <div class="form-group">
+                  <label for="sessionDescription">Omschrijving</label>
+                  <textarea rows="3" class="form-control" id="sessionDescription" name="sessionDescription"
+                            [(ngModel)]="newSession.description" required></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="typeCircle">Type cirkel</label>
+                  <select class="form-control" id="typeCircle"
+                          [(ngModel)]="newSession.typeCircle" name="typeCircle" required>
+                    <option *ngFor="let type of types" [value]="type">{{type}}</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="scheduledStartTime">Tijdstip (Optioneel)</label>
+                  <input type="datetime-local" class="form-control" id="scheduledStartTime" name="scheduledStartTime"
+                         [(ngModel)]="newSession.scheduledStartTime"/>
+                </div>
+                <div class="form-group">
+                  <label for="turnTime">Maximale tijd tussen beurten</label>
+                  <input type="text" class="form-control" id="turnTime" name="turnTime" placeholder="In minuten"
+                         [(ngModel)]="newSession.turnTime" required/>
+                </div>
+                <div class="form-group">
+                  <label for="minPicks">Min. aantal kaartjes per deelnemer</label>
+                  <input type="number" class="form-control" id="minPicks" name="minPicks" [(ngModel)]="newSession.minPicks" required/>
+                </div>
+                <div class="form-group">
+                  <label for="maxPicks">Max. aantal kaartjes per deelnemer</label>
+                  <input type="number" class="form-control" id="maxPicks" name="maxPicks" [(ngModel)]="newSession.maxPicks" required/>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="addCards">
+              <div class="row">
+                <kandoe-card
+                  *ngFor="let c of cards"
+                  (cardClick)="cardClick($event)"
+                  [card]="c">
+                </kandoe-card>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-primary">Voeg toe</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div id="cloneThemeModal" class="modal fade" role="dialog" *ngIf="currentTheme">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Kloon thema</h4>
+      </div>
+      <div class="modal-body">
+        <form name="form" (ngSubmit)="cloneTheme()">
+          <div class="form-group">
+            <label for="cloneThemeName">Naam</label>
+            <input type="text" class="form-control" id="cloneThemeName" name="cloneThemeName"
+                   [(ngModel)]="cloneThemeName" required/>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-primary">Kloon thema</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

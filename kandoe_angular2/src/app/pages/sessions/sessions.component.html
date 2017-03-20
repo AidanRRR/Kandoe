@@ -1,0 +1,45 @@
+<header></header>
+<div id="page-wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class="page-header">{{ 'MY SESSIONS' | translate }}</h1>
+      </div>
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#active" data-toggle="tab">{{ 'ACTIVE' | translate }}</a>
+        </li>
+        <li><a href="#planned" data-toggle="tab">{{ 'PLANNED' | translate }}</a>
+        </li>
+        <li><a href="#finished" data-toggle="tab">{{ 'EXPIRED' | translate }}</a>
+        </li>
+      </ul>
+
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div class="tab-pane fade in active" id="active">
+          <div class="row">
+            <session-card
+              *ngFor="let s of activeSessions" [session]="s">
+            </session-card>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="planned">
+          <div class="row">
+            <session-card
+              *ngFor="let s of plannedSessions" [session]="s">
+            </session-card>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="finished">
+          <div class="row">
+            <session-card
+              *ngFor="let s of finishedSessions" [session]="s">
+            </session-card>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.row -->
+  </div>
+  <!-- /.container-fluid -->
+</div>
